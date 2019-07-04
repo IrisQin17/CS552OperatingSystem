@@ -1,0 +1,7 @@
+可运行的指令：
+TEST 1：CREAT 最多15个，UNLINK 最多15个
+TEST 2：CREAT bigfile，OPEN bigfile，WRITE 前8个block
+TEST 3：LSEEK 到文件头，READ 前8个block，CLOSE bigfile
+TEST 4：无
+TEST 5：MKDIR 3个文件夹
+TEST 6：无

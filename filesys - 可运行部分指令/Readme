@@ -1,0 +1,13 @@
+README for Linux by Mingxin Chen and Ji-Ying Zou
+
+We completed this assignment by implementing a Linux kernel loadable module for my ramdisk. We started with create the ramdisk and entry point under /proc and called it ramdisk, so there would be a ramdisk whose path is  “/proc/ramdisk” when loaded, and it would disappear if we unloaded.
+
+After we create the entry for the ramdisk, we make it with max size 2MB, and make it in 4 partitions which are superblock, inodes arrays, bitmap, and the last one is the space for directories and regular files.
+
+After all of this, we implements the functions including creat, open, read, write, lseek, close, unlink and so on, we made sure the max number of files can be 1023, and there are 8 direct data block pointers and 1 indirect single data pointer which points to 64 data blocks and the other indirect double pointers to which each of them points to 64 data blocks. 
+
+We basically call the ioctl(fd, cmd, obj) command for user level, and we passed the parameter which may a char pointer or a object to the kernel, after the kernel received the command, it would use a switch(cmd) to find the corresponding operation it needs to perform.
+
+After it completes the operation, it may use the copy_to_user to pass the parameters required by the user; for instance, if the user ask the system to read a specific file, the system used to user the command copy_from_user to get the pathname for with the user would like to read, after the kernel reads the corresponding operations, it would return the contents we would like to read by using copy_to_user.
+
+We compile the module and insert it, after that we compile the user_interface.c and execute it. And we show our results by typing ./run.sh under the ramdisk directory.
