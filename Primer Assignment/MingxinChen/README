@@ -1,0 +1,20 @@
+Mingxin Chen
+BU ID: B80752071
+
+
+/* KBD_module.c + KBD_test.c */
+This module uses 'interrupt IRQ1' to handle the input signals from the keyboard. However, I still don't know how to ban the handler of i8042 and how to solve the problem of simultaneously inputting 'shift' and the other keys. 
+
+> make -C /usr/src/linux-`uname -r` SUBDIRS=$PWD modules
+> gcc -o KBD_test KBD_test.c
+> insmod KBD_module.ko
+> ./KBD_test
+
+
+/* KBD_module_noIR.c + KBD_test_noIR.c */
+This module polls in the kernel to get input key from the keyboard.
+
+> make -C /usr/src/linux-`uname -r` SUBDIRS=$PWD modules
+> gcc -o KBD_test_noIR KBD_test_noIR.c
+> insmod KBD_module_noIR.ko
+> ./KBD_test_noIR
